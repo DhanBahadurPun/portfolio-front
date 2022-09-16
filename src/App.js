@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import StockList from "./components/StockList";
+import Header from "./components/UI/Header";
+import Dashboard from "./components/Dashborad";
+import ProfitLoss from "./components/ProfitLoss";
+import AddStock from "./components/AddStock";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/stock-list" element={<StockList />} />
+        <Route path="/profit-loss" element={<ProfitLoss />} />
+        <Route path="/add" element={<AddStock />} />
+      </Routes>
+    </Fragment>
   );
 }
 
