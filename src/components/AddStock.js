@@ -45,6 +45,7 @@ function AddStock() {
       await axios.post(API, data);
       successToast("Success!");
     } catch ({ response }) {
+      console.log(response);
       errorToast(response.data.message);
     }
 
@@ -73,6 +74,8 @@ function AddStock() {
               <option value="Nepal Investment Bank">
                 Nepal Investment Bank
               </option>
+              <option value="NIC ASIA Bank">NIC ASIA Bank</option>
+              <option value="Nabil Bank">Nabil Bank</option>
             </select>
             <select
               value={transactionType}

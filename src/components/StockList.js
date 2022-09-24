@@ -17,21 +17,28 @@ function StockList() {
   }, []);
 
   const table_data = stocks.map((item, index) => {
+    // if (item.transactionType === "buy")
     return (
       <tr key={`${item.id}`}>
         <td>{index + 1}</td>
         <td>{item.name}</td>
         <td>{item.transactionType}</td>
-        <td>{item.quantity["$numberDecimal"]}</td>
-        <td>{parseFloat(item.ltp["$numberDecimal"]).toFixed(2)}</td>
-        <td>{`${new Date(item.transactionDate).getFullYear()}/${
-          new Date(item.transactionDate).getMonth() + 1
-        }/${new Date(item.transactionDate).getDate()}`}</td>
+        <td>
+          {item.transactionType === "buy"
+            ? item.buyQuantity
+            : item.sellQuantity}
+        </td>
+        <td>
+          {item.transactionType === "buy" ? item.buyAmount : item.sellAmount}
+        </td>
+        <td>{`${new Date(item.created_at).getFullYear()}/${
+          new Date(item.created_at).getMonth() + 1
+        }/${new Date(item.created_at).getDate()}`}</td>
       </tr>
     );
   });
 
-  return (
+  return stocks.length > 0 ? (
     <table className={classes["table"]}>
       <thead className={classes["table-head"]}>
         <tr>
@@ -45,6 +52,17 @@ function StockList() {
       </thead>
       <tbody className={classes["table-body"]}>{table_data}</tbody>
     </table>
+  ) : (
+    <p
+      style={{
+        textAlign: "center",
+        marginTop: 20,
+        fontSize: "20px",
+        fontWeight: 700,
+      }}
+    >
+      No Records
+    </p>
   );
 }
 
